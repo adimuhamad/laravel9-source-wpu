@@ -7,8 +7,7 @@
         <li>
             <h4><a href="/categories/{{ $category->slug }}" class="text-decoration-none">{{ $category->name }}</a></h4>
         </li>
-    </ul>
-            
+    </ul>            
     @endforeach
 
 @endsection
