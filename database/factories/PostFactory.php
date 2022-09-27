@@ -24,7 +24,7 @@ class PostFactory extends Factory
             'title' => $this->faker->sentence(mt_rand(3,7)),
             'slug' => $this->faker->slug(5),
             'excerpt' => $this->faker->paragraph(),
-            'body' => $this->faker->paragraph(mt_rand(20,40)),
+            'body' => collect($this->faker->paragraphs(mt_rand(20,40)))->map(fn($p) => "<p>$p</p>")->implode(''),
             'published_at' => now(),
         ];
     }
