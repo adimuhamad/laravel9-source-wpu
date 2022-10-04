@@ -14,7 +14,7 @@
     <!-- My Style -->
     <link rel="stylesheet" href="/css/style.css">
 
-    <title>My Blog | {{ $title }}</title>
+    <title>Digitak Blog | {{ $title }}</title>
   </head>
   <body>
 
