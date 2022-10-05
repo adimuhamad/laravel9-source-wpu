@@ -5,14 +5,20 @@
   <h1 class="h2">Digitak Posts</h1>        
 </div>
 
-<div class="table-responsive col-lg">
+<div class="table-responsive col-lg-11">
+  @if(session()->has('success'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  @endif
   <a href="/dashboard/posts/create" class="btn btn-primary mb-3"><span data-feather="plus"></span> Create new post</a>
   <table class="table table-striped table-sm">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
-        <th scope="col">Categories</th>
+        <th scope="col">Category</th>
         <th scope="col">Action</th>
       </tr>
     </thead>

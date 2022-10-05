@@ -14,6 +14,10 @@
     <link rel="stylesheet" type="text/css" href="/css/trix.css">
     <script type="text/javascript" src="/js/trix.js"></script>
 
+    {{-- Sidebar --}}
+    {{-- <link rel="stylesheet" type="text/css" href="/css/sidebars.css">
+    <script type="text/javascript" src="/js/sidebars.js"></script> --}}
+
     <style>
       trix-toolbar [data-trix-button-group="file-tools"] {
         display:none;
