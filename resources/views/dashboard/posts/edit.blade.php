@@ -7,7 +7,7 @@
 </div>
 
 <div class="col-lg-11 mb-5">
-  <form action="/dashboard/posts/{{ $post->slug }}" method="post">
+  <form action="/dashboard/posts/{{ $post->slug }}" method="post" enctype="multipart/form-data">
     @method('patch')
     @csrf
     <div class="mb-3">
@@ -48,7 +48,13 @@
     </div>
     <div class="mb-3">
       <label for="image" class="form-label">Select Image</label>
-      <input class="form-control @error('image') is-invalid @enderror" type="file" accept=".jpg,.jpeg,.png" id="image" name="image" value="{{ old('image', $post->image) }}">
+      <input type="hidden" name="oldImage" value="{{ $post->image }}">
+      @if($post->image)
+        <img src="{{ asset('storage/' . $post->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+      @else
+        <img class="img-preview img-fluid mb-3 col-sm-5">        
+      @endif
+      <input class="form-control @error('image') is-invalid @enderror" type="file" accept=".jpg,.jpeg,.png" id="image" name="image" onchange="previewImage()">
       <div>*file type .jpg .jpeg .png | max size 2 mb</div>
       @error('image')
       <div class="invalid-feedback">
@@ -82,6 +88,20 @@
   document.addEventListener('trix-file-accept', function(e) {
     e.preventDefault();
   });
+
+  function previewImage() {
+    const image = document.querySelector('#image');
+    const imgPreview = document.querySelector('.img-preview');
+
+    imgPreview.style.display = 'block';
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function(OFREvent) {
+      imgPreview.src = OFREvent.target.result;
+    }
+  }
 </script>
 
 @endsection
