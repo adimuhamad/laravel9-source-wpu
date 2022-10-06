@@ -7,7 +7,7 @@
 </div>
 
 <div class="col-lg-11 mb-5">
-  <form action="/dashboard/posts" method="post">
+  <form action="/dashboard/posts" method="post" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>      
@@ -46,12 +46,23 @@
       @enderror
     </div>
     <div class="mb-3">
+      <label for="image" class="form-label">Select Image</label>
+      <input class="form-control @error('image') is-invalid @enderror" type="file" accept=".jpg,.jpeg,.png" id="image" name="image">
+      <div>*file type .jpg .jpeg .png | max size 2 mb</div>
+      @error('image')
+      <div class="invalid-feedback">
+        {{ $message }}
+      </div>
+      @enderror
+    </div>
+    <div class="mb-3">
       <label for="body" class="form-label">Body</label>
+      
+      <input id="body" type="hidden" name="body" value="{{ old('body') }}">
+      <trix-editor input="body"></trix-editor>
       @error('body')
         <p class="text-danger">{{ $message }}</p>
       @enderror
-      <input id="body" type="hidden" name="body" value="{{ old('body') }}">
-      <trix-editor input="body"></trix-editor>
     </div>    
     <button type="submit" class="btn btn-primary">Create Post</button>
     <a href="/dashboard/posts" class="btn btn-warning">Cancel</a>
