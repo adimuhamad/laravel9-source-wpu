@@ -30,7 +30,7 @@
     <div class="mb-3">
       <label for="category" class="form-label">Category</label>      
       <select class="form-select @error('category') is-invalid @enderror" name="category_id" required>
-        <option selected>Choose Category</option>
+        <option value="none" selected disabled hidden>Choose Category</option>
         @foreach ($categories as $category)
           @if(old('category_id') == $category->id)
             <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
@@ -48,8 +48,8 @@
     <div class="mb-3">
       <label for="image" class="form-label">Select Image</label>
       <img class="img-preview img-fluid mb-3 col-sm-5">
-      <input class="form-control @error('image') is-invalid @enderror" type="file" accept=".jpg,.jpeg,.png" id="image" name="image" onchange="previewImage()">
-      <div>*file type .jpg .jpeg .png | max size 2 mb</div>
+        <input class="form-control @error('image') is-invalid @enderror" type="file" accept=".jpg,.jpeg,.png" id="image" name="image" onchange="previewImage()">
+        <div>*file type .jpg .jfif .png | max size 2 mb</div>
       @error('image')
       <div class="invalid-feedback">
         {{ $message }}
@@ -57,8 +57,7 @@
       @enderror
     </div>
     <div class="mb-3">
-      <label for="body" class="form-label">Body</label>
-      
+      <label for="body" class="form-label">Body</label>      
       <input id="body" type="hidden" name="body" value="{{ old('body') }}">
       <trix-editor input="body"></trix-editor>
       @error('body')

@@ -43,23 +43,23 @@ class DashboardPostController extends Controller
    */
   public function store(Request $request)
   {
-    $validatedData = $request->validate([
-      'title' => 'required|max:100',
-      'slug' => 'required|unique:posts',
-      'category_id' => 'required',
-      'body' => 'required',
-      'image' => 'image|file|max:2048'
-    ]);
+      $validatedData = $request->validate([
+        'title' => 'required|max:100',
+        'slug' => 'required|unique:posts',
+        'category_id' => 'required',
+        'body' => 'required',
+        'image' => 'image|file|max:2048'
+      ]);
 
-    if($request->file('image')) {
-      $validatedData['image'] = $request->file('image')->store('post-images');
-    }
+      if($request->file('image')) {
+        $validatedData['image'] = $request->file('image')->store('post-images');
+      }
 
-    $validatedData['user_id'] = auth()->user()->id;
-    $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+      $validatedData['user_id'] = auth()->user()->id;
+      $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
-    Post::create($validatedData);
-    return redirect('/dashboard/posts')->with('success', 'New post has been added!');
+      Post::create($validatedData);
+      return redirect('/dashboard/posts')->with('success', 'New post has been added!');    
   }
 
   /**

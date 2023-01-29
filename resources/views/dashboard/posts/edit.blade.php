@@ -54,8 +54,8 @@
       @else
         <img class="img-preview img-fluid mb-3 col-sm-5">        
       @endif
-      <input class="form-control @error('image') is-invalid @enderror" type="file" accept=".jpg,.jpeg,.png" id="image" name="image" onchange="previewImage()">
-      <div>*file type .jpg .jpeg .png | max size 2 mb</div>
+      <input class="form-control @error('image') is-invalid @enderror" type="file" accept=".jpg,.jfif,.png" id="image" name="image" onchange="previewImage()">
+      <div>*file type .jpg .jfif .png | max size 2 mb</div>
       @error('image')
       <div class="invalid-feedback">
         {{ $message }}
@@ -63,12 +63,12 @@
       @enderror
     </div>
     <div class="mb-3">
-      <label for="body" class="form-label">Body</label>
+      <label for="body" class="form-label">Body</label>      
+      <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
+      <trix-editor input="body"></trix-editor>
       @error('body')
         <p class="text-danger">{{ $message }}</p>
       @enderror
-      <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
-      <trix-editor input="body"></trix-editor>
     </div>    
     <button type="submit" class="btn btn-primary">Update Post</button>
     <a href="/dashboard/posts" class="btn btn-warning">Cancel</a>
